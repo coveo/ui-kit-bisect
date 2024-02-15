@@ -1,0 +1,19 @@
+{
+  "name": "atomic-bisecter",
+  "type": "module",
+  "private": "true",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npx playwright install"
+  },
+  "dependencies": {
+    "@playwright/test": "1.41.2",
+    "@types/node": "20.11.17"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0"
+}
