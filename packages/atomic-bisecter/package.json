@@ -10,8 +10,8 @@
     "postinstall": "npx playwright install"
   },
   "dependencies": {
-    "@playwright/test": "1.41.2",
-    "@types/node": "20.11.19"
+    "@playwright/test": "1.48.0",
+    "@types/node": "20.16.11"
   },
   "keywords": [],
   "author": "",
