@@ -1,43 +1,11 @@
 name: Atomic Bisecter
 on:
- workflow_dispatch:
-   inputs:
-    good:
-      description: 'The commit that is known to be good'
-      required: true
-    bad:
-      description: 'The commit that is known to be bad'
-      required: true
-      default: 'master'
+  pull_request:
+    branches:
+      - main
 jobs:
   bisect:
-    runs-on: ubuntu-latest
+    runs-on: [ coveo, linux, x64, ec2 ]
     steps:
-      - name: Checkout ui-kit
-        uses: actions/checkout@v4
-        with:
-          repository: coveo/ui-kit
-          path: ui-kit
-          fetch-depth: 0
-      - name: Checkout bisecter
-        uses: actions/checkout@v4
-        with:
-          path: bisecter
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Init Bisecter
-        run: npm ci
-        working-directory: bisecter
-      - name: Bisect
-        run: |
-          git bisect start ${{ github.event.inputs.bad }} ${{ github.event.inputs.good }}
-          git bisect run node ../bisecter/packages/atomic-bisecter/index.js
-        working-directory: ui-kit
-      - name: Summary
-        run: |
-          echo "Bisect complete 🐛" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          git bisect view >> $GITHUB_STEP_SUMMARY
-        working-directory: ui-kit
+      - name: Get Caller Identity
+        run: aws sts get-caller-identity
